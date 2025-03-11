@@ -198,7 +198,11 @@ class _HomeContentState extends State<HomeContent> {
                 mainAxisSpacing: 20,
               ),
               delegate: SliverChildBuilderDelegate(
-                (context, index) => HotelCard(item: _filteredItems[index]),
+                (context, index) => HotelCard(
+                  item: _filteredItems[index],
+                  onTap: () => Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => DetailsPage(item: _filteredItems[index]))),
+                ),
                 childCount: _filteredItems.length,
               ),
             ),
