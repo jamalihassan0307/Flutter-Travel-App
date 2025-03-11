@@ -15,43 +15,33 @@ class PagesData {
 List<PagesData> pages = [
   PagesData(
     id: 0,
-    title:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    subTitle:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    image: 'assets/07.jpg',
+    title: 'Discover Luxury Stays',
+    subTitle: 'Experience world-class hospitality and unforgettable moments in the most exclusive resorts.',
+    image: 'assets/Ozen Reserve Bolifushi - Luxury.jpg',
   ),
   PagesData(
     id: 1,
-    title:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    subTitle:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    image: 'assets/02.jpg',
+    title: 'Paradise Awaits',
+    subTitle: 'From overwater villas to beachfront resorts, find your perfect luxury escape.',
+    image: 'assets/overwater-villas.jpg',
   ),
   PagesData(
     id: 2,
-    title:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    subTitle:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    image: 'assets/03.jpg',
+    title: 'Culinary Excellence',
+    subTitle: 'Indulge in exceptional dining experiences with world-renowned chefs and stunning views.',
+    image: 'assets/beach-grill-restaurant.jpg',
   ),
   PagesData(
     id: 3,
-    title:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    subTitle:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    image: 'assets/04.jpg',
+    title: 'Infinity and Beyond',
+    subTitle: 'Dive into infinity pools that blend seamlessly with the horizon.',
+    image: 'assets/sky-pool.jpg',
   ),
   PagesData(
     id: 4,
-    title:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    subTitle:
-        'Flutter gives us a lot of standard views to use in our projects, but from time to time we need to create custom views. ',
-    image: 'assets/05.jpg',
+    title: 'Royal Treatment',
+    subTitle: 'Experience the epitome of luxury in our carefully curated collection of premium resorts.',
+    image: 'assets/rambagh-palace-exterior.jpg',
   ),
 ];
 
@@ -63,11 +53,11 @@ class Menu {
 }
 
 List<Menu> menu = [
-  Menu(id: 0, name: 'Most Popular'),
-  Menu(id: 1, name: 'Recommended'),
-  Menu(id: 2, name: 'Treanding'),
-  Menu(id: 3, name: 'Natural'),
-  Menu(id: 4, name: 'Countryside'),
+  Menu(id: 0, name: 'Featured'),
+  Menu(id: 1, name: 'Beachfront'),
+  Menu(id: 2, name: 'Luxury'),
+  Menu(id: 3, name: 'Family'),
+  Menu(id: 4, name: 'Spa & Wellness'),
 ];
 
 class Item {
@@ -101,31 +91,69 @@ class Item {
 List<Item> items = [
   Item(
     id: 1,
-    image: 'assets/beach-grill-restaurant.jpg',
-    titel: 'Beach Grill Restaurant',
+    image: 'assets/Ozen Reserve Bolifushi - Luxury.jpg',
+    titel: 'Ozen Reserve Bolifushi',
     location: 'Maldives',
-    description: 'Experience fine dining at its best with our beachfront grill restaurant offering fresh seafood and premium cuts with stunning ocean views.',
-    price: '\$450',
+    description: 'Experience ultimate luxury in this exclusive island resort featuring overwater villas, private pools, and world-class dining experiences.',
+    price: '\$2,800',
     rating: '4.9',
-    days: 'Open Daily',
-    itinerary: 'Breakfast: 7:00 AM - 10:30 AM\nLunch: 12:00 PM - 3:00 PM\nDinner: 6:30 PM - 10:30 PM\nSpecialties include fresh caught seafood, premium steaks, and signature cocktails.',
-    weather: '28°C',
-    category: ['DINING', 'BEACHFRONT', 'LUXURY'],
+    days: '5 days',
+    itinerary: 'Day 1: Arrival & Spa\nDay 2: Water Sports\nDay 3: Island Tour\nDay 4: Diving\nDay 5: Sunset Cruise',
+    weather: '30°C',
+    category: ['LUXURY', 'OVERWATER', 'SPA'],
   ),
   Item(
     id: 2,
-    image: 'assets/Ozen Reserve Bolifushi - Luxury.jpg',
-    titel: 'Ozen Reserve Bolifushi',
-    location: 'Bolifushi Island, Maldives',
-    description: 'An ultra-luxury all-inclusive resort featuring overwater villas, private pools, and world-class dining experiences.',
-    price: '\$2800',
-    rating: '4.9',
-    days: '5 days',
-    itinerary: 'Luxury overwater accommodation with private pools\nPersonal butler service\nUnlimited dining at specialty restaurants\nWater sports and diving activities\nSpa treatments',
-    weather: '30°C',
-    category: ['RESORT', 'LUXURY', 'OVERWATER'],
+    image: 'assets/ikos-dassia.jpg',
+    titel: 'Ikos Dassia',
+    location: 'Corfu, Greece',
+    description: 'A stunning beachfront resort offering infinite lifestyle experiences and Mediterranean elegance.',
+    price: '\$1,200',
+    rating: '4.8',
+    days: '7 days',
+    itinerary: 'All-inclusive luxury experience with multiple restaurants and activities',
+    weather: '25°C',
+    category: ['BEACH', 'FAMILY', 'ALL-INCLUSIVE'],
   ),
-  // Add more items following similar pattern...
+  Item(
+    id: 3,
+    image: 'assets/secrets-maroma-beach.jpg',
+    titel: 'Secrets Maroma Beach',
+    location: 'Riviera Maya, Mexico',
+    description: 'Adults-only paradise with pristine beaches and unlimited luxury.',
+    price: '\$1,500',
+    rating: '4.7',
+    days: '4 days',
+    itinerary: 'Adults-only luxury experience with gourmet dining and spa services',
+    weather: '28°C',
+    category: ['ADULTS', 'BEACH', 'GOURMET'],
+  ),
+  Item(
+    id: 4,
+    image: 'assets/rambagh-palace-exterior.jpg',
+    titel: 'Rambagh Palace',
+    location: 'Jaipur, India',
+    description: 'Live like royalty in this converted palace with stunning architecture and royal service.',
+    price: '\$2,200',
+    rating: '4.9',
+    days: '3 days',
+    itinerary: 'Royal palace experience with traditional hospitality',
+    weather: '32°C',
+    category: ['HERITAGE', 'LUXURY', 'CULTURE'],
+  ),
+  Item(
+    id: 5,
+    image: 'assets/rixos-premium-belek.jpg',
+    titel: 'Rixos Premium Belek',
+    location: 'Antalya, Turkey',
+    description: 'Luxury beach resort with extensive sports and entertainment facilities.',
+    price: '\$1,800',
+    rating: '4.8',
+    days: '6 days',
+    itinerary: 'Premium all-inclusive with sports and entertainment',
+    weather: '26°C',
+    category: ['BEACH', 'SPORTS', 'FAMILY'],
+  ),
 ];
 
 class Categories {
@@ -137,11 +165,11 @@ class Categories {
 }
 
 List<Categories> categories = [
-  Categories(id: 0, image: 'assets/overwater-villas.jpg', name: 'Overwater Villas'),
+  Categories(id: 0, image: 'assets/overwater-villas.jpg', name: 'Overwater'),
   Categories(id: 1, image: 'assets/sky-pool.jpg', name: 'Infinity Pools'),
-  Categories(id: 2, image: 'assets/beach-grill-restaurant.jpg', name: 'Fine Dining'),
+  Categories(id: 2, image: 'assets/beach-grill-restaurant.jpg', name: 'Dining'),
   Categories(id: 3, image: 'assets/aerial-view.jpg', name: 'Beachfront'),
-  Categories(id: 4, image: 'assets/spa-wellness.jpg', name: 'Spa & Wellness'),
+  Categories(id: 4, image: 'assets/wvpbedroom.jpg', name: 'Suites'),
   Categories(id: 5, image: 'assets/kain-pool-kids-section.jpg', name: 'Family'),
 ];
 
