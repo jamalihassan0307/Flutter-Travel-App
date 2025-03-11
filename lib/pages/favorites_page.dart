@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uidesign08/data/data.dart';
 import 'package:uidesign08/providers/favorites_provider.dart';
+import 'package:uidesign08/widgets/booking_bottom_sheet.dart';
 import 'package:uidesign08/widgets/hotel_card.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -115,4 +117,4 @@ class FavoritesPage extends StatelessWidget {
       builder: (context) => BookingBottomSheet(hotel: hotel),
     );
   }
-} 
+}
