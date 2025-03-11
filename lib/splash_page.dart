@@ -23,8 +23,7 @@ class _SplashPageState extends State<SplashPage> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (builder) => HomePage()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => HomePage()));
             },
             child: Text('SKIP'),
           ),
@@ -60,8 +59,7 @@ class _SplashPageState extends State<SplashPage> {
                                       height: 350,
                                       width: 250,
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
+                                          borderRadius: BorderRadius.circular(20.0),
                                           image: DecorationImage(
                                             image: AssetImage(
                                               pages[index].image,
@@ -70,8 +68,7 @@ class _SplashPageState extends State<SplashPage> {
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.1),
+                                              color: Colors.black.withOpacity(0.1),
                                               blurRadius: 20,
                                               offset: Offset(0, 10),
                                             ),
@@ -86,17 +83,13 @@ class _SplashPageState extends State<SplashPage> {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
-                                            pages[index == 0
-                                                    ? pages.length - 1
-                                                    : index - 1]
-                                                .image,
+                                            pages[index == 0 ? pages.length - 1 : index - 1].image,
                                           ),
                                           fit: BoxFit.cover,
                                         ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
+                                            color: Colors.black.withOpacity(0.1),
                                             blurRadius: 20,
                                             offset: Offset(0, 10),
                                           ),
@@ -116,17 +109,13 @@ class _SplashPageState extends State<SplashPage> {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
-                                            pages[index == pages.length - 1
-                                                    ? 0
-                                                    : index + 1]
-                                                .image,
+                                            pages[index == pages.length - 1 ? 0 : index + 1].image,
                                           ),
                                           fit: BoxFit.cover,
                                         ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
+                                            color: Colors.black.withOpacity(0.1),
                                             blurRadius: 20,
                                             offset: Offset(0, 10),
                                           ),
@@ -185,9 +174,7 @@ class _SplashPageState extends State<SplashPage> {
                           margin: EdgeInsets.only(right: 8.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50.0),
-                            color: i == selectIndex
-                                ? Colors.blue
-                                : Colors.grey.shade300,
+                            color: i == selectIndex ? Colors.blue : Colors.grey.shade300,
                           ),
                         )
                     ],
@@ -195,10 +182,7 @@ class _SplashPageState extends State<SplashPage> {
                   GestureDetector(
                     onTap: () {
                       if (selectIndex == 4) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => HomePage()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder) => HomePage()));
                       }
                     },
                     child: CircleAvatar(

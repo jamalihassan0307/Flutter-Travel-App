@@ -136,9 +136,7 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                       Text('Check-in', style: TextStyle(color: Colors.grey)),
                       SizedBox(height: 5),
                       Text(
-                        checkIn == null
-                            ? 'Select date'
-                            : '${checkIn!.day}/${checkIn!.month}/${checkIn!.year}',
+                        checkIn == null ? 'Select date' : '${checkIn!.day}/${checkIn!.month}/${checkIn!.year}',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -173,9 +171,7 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
                       Text('Check-out', style: TextStyle(color: Colors.grey)),
                       SizedBox(height: 5),
                       Text(
-                        checkOut == null
-                            ? 'Select date'
-                            : '${checkOut!.day}/${checkOut!.month}/${checkOut!.year}',
+                        checkOut == null ? 'Select date' : '${checkOut!.day}/${checkOut!.month}/${checkOut!.year}',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -320,9 +316,9 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
         ),
         child: Text(
           'Proceed to Payment',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16, color: Colors.white),
         ),
       ),
     );
   }
-} 
+}
