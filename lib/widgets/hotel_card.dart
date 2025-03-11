@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uidesign08/data/data.dart';
-import 'package:uidesign08/details_page.dart';
 import 'package:uidesign08/providers/favorites_provider.dart';
 
 class HotelCard extends StatelessWidget {
@@ -9,7 +8,7 @@ class HotelCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const HotelCard({
-    Key? key, 
+    Key? key,
     required this.item,
     this.onTap,
   }) : super(key: key);
@@ -48,9 +47,7 @@ class HotelCard extends StatelessWidget {
                     builder: (context, favoritesProvider, child) {
                       return IconButton(
                         icon: Icon(
-                          favoritesProvider.isFavorite(item) 
-                              ? Icons.favorite 
-                              : Icons.favorite_border,
+                          favoritesProvider.isFavorite(item) ? Icons.favorite : Icons.favorite_border,
                           color: Colors.red,
                         ),
                         onPressed: () => favoritesProvider.toggleFavorite(item),
@@ -102,4 +99,4 @@ class HotelCard extends StatelessWidget {
       ),
     );
   }
-} 
+}

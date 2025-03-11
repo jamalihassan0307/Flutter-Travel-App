@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:uidesign08/data/data.dart';
 import 'package:uidesign08/providers/booking_provider.dart';
 import 'package:uidesign08/pages/payment_page.dart';
