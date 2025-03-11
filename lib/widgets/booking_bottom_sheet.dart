@@ -100,7 +100,192 @@ class _BookingBottomSheetState extends State<BookingBottomSheet> {
     );
   }
 
-  // Add other build methods for date selection, guest counter, etc.
+  Widget _buildDateSelection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Select Dates',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () async {
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(Duration(days: 365)),
+                  );
+                  if (date != null) {
+                    setState(() => checkIn = date);
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Check-in', style: TextStyle(color: Colors.grey)),
+                      SizedBox(height: 5),
+                      Text(
+                        checkIn == null
+                            ? 'Select date'
+                            : '${checkIn!.day}/${checkIn!.month}/${checkIn!.year}',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 15),
+            Expanded(
+              child: GestureDetector(
+                onTap: () async {
+                  if (checkIn == null) return;
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: checkIn!.add(Duration(days: 1)),
+                    firstDate: checkIn!.add(Duration(days: 1)),
+                    lastDate: checkIn!.add(Duration(days: 30)),
+                  );
+                  if (date != null) {
+                    setState(() => checkOut = date);
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Check-out', style: TextStyle(color: Colors.grey)),
+                      SizedBox(height: 5),
+                      Text(
+                        checkOut == null
+                            ? 'Select date'
+                            : '${checkOut!.day}/${checkOut!.month}/${checkOut!.year}',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGuestCounter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Number of Guests',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.remove_circle_outline),
+              onPressed: () {
+                if (guests > 1) setState(() => guests--);
+              },
+            ),
+            Text(
+              '$guests',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            IconButton(
+              icon: Icon(Icons.add_circle_outline),
+              onPressed: () {
+                if (guests < 4) setState(() => guests++);
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRoomTypeSelection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Room Type',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        ...roomTypes.map((type) => RadioListTile<String>(
+              title: Text(type),
+              value: type,
+              groupValue: selectedRoom,
+              onChanged: (value) {
+                if (value != null) setState(() => selectedRoom = value);
+              },
+            )),
+      ],
+    );
+  }
+
+  Widget _buildPriceDetails() {
+    return Container(
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Price Details',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Room Rate'),
+              Text('\$${widget.hotel.price} / night'),
+            ],
+          ),
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Total',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '\$1,200',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildBookButton() {
     return Container(
