@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             SliverAppBar(
               expandedHeight: 120,
               floating: true,
+              automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
