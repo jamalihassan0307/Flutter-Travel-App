@@ -6,16 +6,18 @@ import 'package:uidesign08/providers/favorites_provider.dart';
 
 class HotelCard extends StatelessWidget {
   final Item item;
+  final VoidCallback? onTap;
 
-  const HotelCard({Key? key, required this.item}) : super(key: key);
+  const HotelCard({
+    Key? key, 
+    required this.item,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => DetailsPage(item: item)),
-      ),
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
