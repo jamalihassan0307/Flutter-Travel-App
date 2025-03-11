@@ -72,8 +72,8 @@ List<Menu> menu = [
 
 class Item {
   final int id;
-  final String titel;
   final String image;
+  final String titel;
   final String location;
   final String description;
   final String price;
@@ -81,7 +81,7 @@ class Item {
   final String days;
   final String itinerary;
   final String weather;
-  final List category;
+  final List<String> category;
 
   Item({
     required this.id,
@@ -100,55 +100,32 @@ class Item {
 
 List<Item> items = [
   Item(
-    id: 0,
-    image: 'assets/07.jpg',
-    titel: 'Banff National Park',
-    location: 'Alberta, Canada',
-    description:
-        """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit""",
-    price: '\$1250',
-    rating: '4.8',
-    days: '4 days',
-    itinerary:
-        """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""",
-    weather: '5 C',
-    category: ['MOUNTAINS', 'NATURE', 'BEAUTY'],
+    id: 1,
+    image: 'assets/beach-grill-restaurant.jpg',
+    titel: 'Beach Grill Restaurant',
+    location: 'Maldives',
+    description: 'Experience fine dining at its best with our beachfront grill restaurant offering fresh seafood and premium cuts with stunning ocean views.',
+    price: '\$450',
+    rating: '4.9',
+    days: 'Open Daily',
+    itinerary: 'Breakfast: 7:00 AM - 10:30 AM\nLunch: 12:00 PM - 3:00 PM\nDinner: 6:30 PM - 10:30 PM\nSpecialties include fresh caught seafood, premium steaks, and signature cocktails.',
+    weather: '28°C',
+    category: ['DINING', 'BEACHFRONT', 'LUXURY'],
   ),
   Item(
-    id: 0,
-    image: 'assets/09.jpg',
-    titel: 'Banff National Park',
-    location: 'Alberta, Canada',
-    description:
-        """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitat ut aliquip ex ea commodo consequat. esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""",
-    price: '\$1250',
-    rating: '4.8',
-    days: '4 days',
-    itinerary:
-        """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""",
-    weather: '5 C',
-    category: ['MOUNTAINS', 'NATURE', 'BEAUTY'],
+    id: 2,
+    image: 'assets/Ozen Reserve Bolifushi - Luxury.jpg',
+    titel: 'Ozen Reserve Bolifushi',
+    location: 'Bolifushi Island, Maldives',
+    description: 'An ultra-luxury all-inclusive resort featuring overwater villas, private pools, and world-class dining experiences.',
+    price: '\$2800',
+    rating: '4.9',
+    days: '5 days',
+    itinerary: 'Luxury overwater accommodation with private pools\nPersonal butler service\nUnlimited dining at specialty restaurants\nWater sports and diving activities\nSpa treatments',
+    weather: '30°C',
+    category: ['RESORT', 'LUXURY', 'OVERWATER'],
   ),
-  Item(
-    id: 0,
-    image: 'assets/08.jpg',
-    titel: 'Banff National Park',
-    location: 'Alberta, Canada',
-    description:
-        """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""",
-    price: '\$1250',
-    rating: '4.8',
-    days: '4 days',
-    itinerary:
-        """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""",
-    weather: '5 C',
-    category: ['MOUNTAINS', 'NATURE', 'BEAUTY'],
-  ),
+  // Add more items following similar pattern...
 ];
 
 class Categories {
@@ -160,12 +137,12 @@ class Categories {
 }
 
 List<Categories> categories = [
-  Categories(id: 0, image: 'assets/01.jpg', name: 'Mountains'),
-  Categories(id: 1, image: 'assets/02.jpg', name: 'Countryside'),
-  Categories(id: 2, image: 'assets/08.jpg', name: 'Snowfall'),
-  Categories(id: 3, image: 'assets/05.jpg', name: 'Natura'),
-  Categories(id: 4, image: 'assets/03.jpg', name: 'Mountains'),
-  Categories(id: 5, image: 'assets/07.jpg', name: 'Countryside'),
+  Categories(id: 0, image: 'assets/overwater-villas.jpg', name: 'Overwater Villas'),
+  Categories(id: 1, image: 'assets/sky-pool.jpg', name: 'Infinity Pools'),
+  Categories(id: 2, image: 'assets/beach-grill-restaurant.jpg', name: 'Fine Dining'),
+  Categories(id: 3, image: 'assets/aerial-view.jpg', name: 'Beachfront'),
+  Categories(id: 4, image: 'assets/spa-wellness.jpg', name: 'Spa & Wellness'),
+  Categories(id: 5, image: 'assets/kain-pool-kids-section.jpg', name: 'Family'),
 ];
 
 class BottonNavData {
