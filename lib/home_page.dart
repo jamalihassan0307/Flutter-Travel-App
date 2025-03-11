@@ -128,9 +128,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                               margin: EdgeInsets.only(right: 10),
                               padding: EdgeInsets.symmetric(horizontal: 20),
                               decoration: BoxDecoration(
-                                color: selectMenu == index
-                                    ? blueColor
-                                    : Colors.white,
+                                color: selectMenu == index ? blueColor : Colors.white,
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
@@ -144,9 +142,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                 child: Text(
                                   menu[index].name,
                                   style: TextStyle(
-                                    color: selectMenu == index
-                                        ? Colors.white
-                                        : Colors.black87,
+                                    color: selectMenu == index ? Colors.white : Colors.black87,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -175,10 +171,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       onTap: () => Navigator.push(
                         context,
                         PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) =>
-                              DetailsPage(item: items[index]),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
+                          pageBuilder: (context, animation, secondaryAnimation) => DetailsPage(item: items[index]),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             return FadeTransition(
                               opacity: animation,
                               child: child,
@@ -233,8 +227,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     SizedBox(height: 5),
                                     Row(
                                       children: [
-                                        Icon(Icons.location_on,
-                                            size: 14, color: Colors.grey),
+                                        Icon(Icons.location_on, size: 14, color: Colors.grey),
                                         SizedBox(width: 5),
                                         Expanded(
                                           child: Text(
@@ -251,8 +244,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     ),
                                     SizedBox(height: 5),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           items[index].price,
@@ -263,8 +255,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                         ),
                                         Row(
                                           children: [
-                                            Icon(Icons.star,
-                                                size: 14, color: Colors.amber),
+                                            Icon(Icons.star, size: 14, color: Colors.amber),
                                             Text(
                                               items[index].rating,
                                               style: TextStyle(

@@ -1,261 +1,271 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uidesign08/core/color.dart';
 import 'package:uidesign08/data/data.dart';
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatefulWidget {
   final Item item;
   const DetailsPage({Key? key, required this.item}) : super(key: key);
 
   @override
+  _DetailsPageState createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+  late Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
+    );
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.5),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    ));
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            height: height / 2.2,
-            child: Image.asset(
-              item.image,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            top: 50.0,
-            left: 20.0,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                height: 40.0,
-                width: 40.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: white,
+          Hero(
+            tag: 'hotel_${widget.item.id}',
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(widget.item.image),
+                  fit: BoxFit.cover,
                 ),
-                child: Icon(Icons.arrow_back),
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: height / 2.4),
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            height: height,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30.0),
-                topRight: Radius.circular(30.0),
-              ),
-              color: white,
-            ),
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.only(top: 20.0),
+          SafeArea(
+            child: Column(
               children: [
-                Text(
-                  item.titel,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 5.0),
-                Text(
-                  item.location,
-                  style: TextStyle(
-                    color: grey,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  children: [
-                    for (int i = 0; i < item.category.length; i++)
-                      Container(
-                        height: 25.0,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
-                        margin: EdgeInsets.only(right: 10.0),
-                        color: grey.withOpacity(0.2),
-                        child: Text(item.category[i]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.black),
+                          onPressed: () => Navigator.pop(context),
+                        ),
                       ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  item.description,
-                  style: TextStyle(
-                    color: grey,
-                    fontWeight: FontWeight.w400,
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          icon: Icon(Icons.favorite_border, color: Colors.red),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Divider(
-                  thickness: 1,
-                  height: 40.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(width: 1),
-                    tagButton(
-                      text: 'Rating',
-                      value: item.rating,
-                      image: 'star.svg',
+                Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FadeTransition(
+                            opacity: _fadeAnimation,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        widget.item.titel,
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.location_on, size: 16, color: Colors.grey),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            widget.item.location,
+                                            style: TextStyle(color: Colors.grey),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: blueColor,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.star, color: Colors.white, size: 16),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        widget.item.rating,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          SlideTransition(
+                            position: _slideAnimation,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'About',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  widget.item.description,
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    height: 1.5,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Container(
+                                  padding: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      _buildFeature(Icons.access_time, widget.item.days, 'Duration'),
+                                      _buildFeature(Icons.wb_sunny, widget.item.weather, 'Weather'),
+                                      _buildFeature(Icons.category, '${widget.item.category.length}', 'Tags'),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: 10),
-                    tagButton(
-                      text: 'Itineray',
-                      value: item.days,
-                      image: 'calendar.svg',
-                    ),
-                    SizedBox(width: 10),
-                    tagButton(
-                      text: 'Weather',
-                      value: item.weather,
-                      image: 'sun.svg',
-                    ),
-                    SizedBox(width: 1),
-                  ],
-                ),
-                Divider(
-                  thickness: 1,
-                  height: 40.0,
-                ),
-                Text(
-                  'ITINERARY',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Text(
-                  item.itinerary,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: grey,
-                  ),
-                ),
-                SizedBox(height: 50.0),
               ],
-            ),
-          ),
-          Positioned(
-            top: height / 2.55,
-            right: 20.0,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 40.0,
-                width: 40.0,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 20.0,
-                      offset: Offset(0, 10),
-                      color: Colors.black.withOpacity(0.15),
-                    ),
-                  ],
-                  color: white,
-                  borderRadius: BorderRadius.circular(40.0),
-                ),
-                child: Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                ),
-              ),
             ),
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 60.0,
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 20.0,
-                offset: Offset(0, 5),
-                color: Colors.black.withOpacity(0.15),
-              ),
-            ],
-            color: white,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.price,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 20.0,
-                      color: green,
-                    ),
-                  ),
-                  Text(
-                    'Price for 2 people',
-                  ),
-                ],
-              ),
-              GestureDetector(
-                child: Container(
-                  height: 40.0,
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  decoration: BoxDecoration(
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: Offset(0, -5),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Price',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                Text(
+                  widget.item.price,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                     color: blueColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Book a Tour',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16.0,
-                        color: white,
-                      ),
-                    ),
                   ),
                 ),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: blueColor,
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
               ),
-            ],
-          ),
+              child: Text(
+                'Book Now',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget tagButton({
-    required String image,
-    required String text,
-    required String value,
-  }) {
+  Widget _buildFeature(IconData icon, String value, String label) {
     return Column(
       children: [
-        CircleAvatar(
-          child: SvgPicture.asset(
-            'assets/icons/$image',
-            color: blueColor,
-            height: 20.0,
-          ),
-          backgroundColor: blueColor.withOpacity(0.2),
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            color: blueColor.withOpacity(0.6),
-            fontWeight: FontWeight.w400,
-          ),
-        ),
+        Icon(icon, color: blueColor),
+        SizedBox(height: 5),
         Text(
           value,
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Text(
+          label,
+          style: TextStyle(color: Colors.grey),
         ),
       ],
     );
