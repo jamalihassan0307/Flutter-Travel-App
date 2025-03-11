@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uidesign08/core/color.dart';
 import 'package:uidesign08/data/data.dart';
+import 'package:uidesign08/widgets/booking_bottom_sheet.dart';
 
 class DetailsPage extends StatefulWidget {
   final Item item;
@@ -235,7 +236,14 @@ class _DetailsPageState extends State<DetailsPage> with TickerProviderStateMixin
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => BookingBottomSheet(hotel: widget.item),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: blueColor,
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
@@ -245,7 +253,7 @@ class _DetailsPageState extends State<DetailsPage> with TickerProviderStateMixin
               ),
               child: Text(
                 'Book Now',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
           ],
