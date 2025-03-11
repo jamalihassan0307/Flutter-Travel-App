@@ -9,6 +9,7 @@ import 'package:uidesign08/pages/bookings_page.dart';
 import 'package:uidesign08/pages/profile_page.dart';
 import 'package:uidesign08/providers/navigation_provider.dart';
 import 'package:uidesign08/widgets/hotel_card.dart';
+import 'package:uidesign08/widgets/custom_bottom_nav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,16 +32,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, navigationProvider, child) {
         return Scaffold(
           body: _pages[navigationProvider.currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: navigationProvider.currentIndex,
-            onTap: (index) => navigationProvider.setIndex(index),
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
-              BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Bookings'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-            ],
-          ),
+          bottomNavigationBar: CustomBottomNavBar(),
         );
       },
     );
