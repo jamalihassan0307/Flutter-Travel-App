@@ -11,303 +11,324 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   int selectMenu = 0;
   int selectIndex = 0;
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        leadingWidth: 65.0,
-        leading: Padding(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            top: 5.0,
-            bottom: 5.0,
-          ),
-          child: Container(
-            height: 40.0,
-            width: 40.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: grey),
-            ),
-            child: Image.asset('assets/icons/dote.png'),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(
-              right: 20.0,
-              top: 5.0,
-              bottom: 5.0,
-            ),
-            child: Container(
-              height: 40.0,
-              width: 45.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 20.0,
-                    offset: Offset(0, 5),
-                  ),
-                ],
-                image: DecorationImage(
-                  image: AssetImage('assets/10.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20.0),
-            Text(
-              'Life is a journey',
-              style: TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            SizedBox(height: 5.0),
-            Text(
-              'Make the best of it.',
-              style: TextStyle(
-                fontSize: 22.0,
-              ),
-            ),
-            SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: Container(
-                height: 50.0,
-                padding: EdgeInsets.only(right: 5.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(
-                    color: grey.withOpacity(0.5),
+      backgroundColor: Colors.grey[100],
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 120,
+              floating: true,
+              backgroundColor: Colors.white,
+              elevation: 0,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'LuxStays',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: blueColor,
+                            ),
+                          ),
+                          CircleAvatar(
+                            radius: 25,
+                            backgroundImage: AssetImage('assets/profile.jpg'),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 300.0,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          hintText: 'Try\"Belgrade, Serbia\"',
-                          border: InputBorder.none,
+                    FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search luxury stays...',
+                            icon: Icon(Icons.search, color: blueColor),
+                          ),
                         ),
                       ),
                     ),
-                    CircleAvatar(
-                      backgroundColor: blueColor,
-                      child: Image.asset(
-                        'assets/icons/tune.png',
-                        color: white,
-                        scale: 2.3,
+                    SizedBox(height: 30),
+                    Text(
+                      'Categories',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: menu.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () => setState(() => selectMenu = index),
+                            child: AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              margin: EdgeInsets.only(right: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              decoration: BoxDecoration(
+                                color: selectMenu == index
+                                    ? blueColor
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  menu[index].name,
+                                  style: TextStyle(
+                                    color: selectMenu == index
+                                        ? Colors.white
+                                        : Colors.black87,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 15.0),
-            Container(
-              height: 40.0,
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                children: [
-                  for (int i = 0; i < menu.length; i++)
-                    GestureDetector(
-                      onTap: () {
-                        setState(() => selectMenu = i);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 15.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              menu[i].name,
-                              style: TextStyle(
-                                color: selectMenu == i ? blueColor : grey,
-                              ),
-                            ),
-                            CircleAvatar(
-                              radius: 2,
-                              backgroundColor: selectMenu == i
-                                  ? blueColor
-                                  : Colors.transparent,
-                            )
-                          ],
+            SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) =>
+                              DetailsPage(item: items[index]),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
                         ),
                       ),
-                    ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: items.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (itemBuilder, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (builder) => DetailsPage(
-                              item: items[index],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 350.0,
-                        width: 220.0,
-                        margin: EdgeInsets.only(right: 20.0, bottom: 20.0),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                items[index].image,
-                              ),
-                            ),
+                      child: Hero(
+                        tag: 'hotel_${items[index].id}',
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 10.0,
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 10,
                                 offset: Offset(0, 5),
                               ),
-                            ]),
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Icon(
-                                Icons.favorite_border_outlined,
-                                color: white,
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    items[index].titel,
-                                    style: TextStyle(
-                                      color: white,
-                                      fontWeight: FontWeight.w600,
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                    ),
+                                    image: DecorationImage(
+                                      image: AssetImage(items[index].image),
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        items[index].location,
-                                        style: TextStyle(
-                                          color: white,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.orange,
-                                        size: 15.0,
-                                      ),
-                                      Text(
-                                        items[index].rating,
-                                        style: TextStyle(
-                                          color: white,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                                ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      items[index].titel,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(height: 5),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.location_on,
+                                            size: 14, color: Colors.grey),
+                                        SizedBox(width: 5),
+                                        Expanded(
+                                          child: Text(
+                                            items[index].location,
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 12,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 5),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          items[index].price,
+                                          style: TextStyle(
+                                            color: blueColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.star,
+                                                size: 14, color: Colors.amber),
+                                            Text(
+                                              items[index].rating,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
-                  }),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              height: 100.0,
-              child: ListView.builder(
-                  itemCount: categories.length,
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (itemBuilder, index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 20.0),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 30.0,
-                            backgroundColor: blueColor,
-                            backgroundImage:
-                                AssetImage(categories[index].image),
-                          ),
-                          SizedBox(height: 5.0),
-                          Text(categories[index].name),
-                        ],
-                      ),
-                    );
-                  }),
+                  },
+                  childCount: items.length,
+                ),
+              ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 60,
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              for (int k = 0; k < navData.length; k++)
-                GestureDetector(
-                  onTap: () {
-                    setState(() => selectIndex = k);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        navData[k].image,
-                        height: 25.0,
-                        color: selectIndex == k ? blueColor : grey,
-                      ),
-                      SizedBox(height: 5.0),
-                      CircleAvatar(
-                        radius: 3.0,
-                        backgroundColor:
-                            selectIndex == k ? blueColor : Colors.transparent,
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: Offset(0, -5),
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          currentIndex: selectIndex,
+          onTap: (index) => setState(() => selectIndex = index),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          selectedItemColor: blueColor,
+          unselectedItemColor: Colors.grey,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.book),
+              label: 'Bookings',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
         ),
       ),
     );
