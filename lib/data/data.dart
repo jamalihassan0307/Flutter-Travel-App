@@ -101,7 +101,7 @@ List<Item> items = [
     days: '5 days',
     itinerary: 'Day 1: Arrival & Spa\nDay 2: Water Sports\nDay 3: Island Tour\nDay 4: Diving\nDay 5: Sunset Cruise',
     weather: '30°C',
-    category: ['LUXURY', 'OVERWATER', 'SPA'],
+    category: ['LUXURY', 'OVERWATER', 'SPA', 'Family', 'Spa & Wellness', 'BEACHFRONT'],
   ),
   Item(
     id: 2,
@@ -114,7 +114,7 @@ List<Item> items = [
     days: '7 days',
     itinerary: 'All-inclusive luxury experience with multiple restaurants and activities',
     weather: '25°C',
-    category: ['BEACH', 'FAMILY', 'ALL-INCLUSIVE'],
+    category: ['BEACH', 'FAMILY', 'ALL-INCLUSIVE', 'BEACHFRONT', 'SPA & WELLNESS'],
   ),
   Item(
     id: 3,
@@ -127,7 +127,7 @@ List<Item> items = [
     days: '4 days',
     itinerary: 'Adults-only luxury experience with gourmet dining and spa services',
     weather: '28°C',
-    category: ['ADULTS', 'BEACH', 'GOURMET'],
+    category: ['ADULTS', 'BEACH', 'GOURMET', 'Family', 'SPA & WELLNESS', 'BEACHFRONT'],
   ),
   Item(
     id: 4,
@@ -153,7 +153,7 @@ List<Item> items = [
     days: '6 days',
     itinerary: 'Premium all-inclusive with sports and entertainment',
     weather: '26°C',
-    category: ['BEACH', 'SPORTS', 'FAMILY', 'Beachfront', 'Spa & Wellness'],
+    category: ['BEACH', 'SPORTS', 'FAMILY', 'BEACHFRONT'],
   ),
   Item(
     id: 6,
@@ -167,7 +167,7 @@ List<Item> items = [
     days: '3 days',
     itinerary: 'Romantic getaway with French cuisine and wine tasting experience',
     weather: '22°C',
-    category: ['BOUTIQUE', 'ROMANTIC', 'CULINARY'],
+    category: ['BOUTIQUE', 'ROMANTIC', 'CULINARY', 'SPA & WELLNESS'],
   ),
   Item(
     id: 7,
