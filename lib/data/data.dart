@@ -94,7 +94,8 @@ List<Item> items = [
     image: 'assets/Ozen Reserve Bolifushi - Luxury.jpg',
     titel: 'Ozen Reserve Bolifushi',
     location: 'Maldives',
-    description: 'Experience ultimate luxury in this exclusive island resort featuring overwater villas, private pools, and world-class dining experiences.',
+    description:
+        'Experience ultimate luxury in this exclusive island resort featuring overwater villas, private pools, and world-class dining experiences.',
     price: '\$2,800',
     rating: '4.9',
     days: '5 days',
@@ -152,14 +153,15 @@ List<Item> items = [
     days: '6 days',
     itinerary: 'Premium all-inclusive with sports and entertainment',
     weather: '26°C',
-    category: ['BEACH', 'SPORTS', 'FAMILY'],
+    category: ['BEACH', 'SPORTS', 'FAMILY', 'Beachfront', 'Spa & Wellness'],
   ),
   Item(
     id: 6,
     image: 'assets/hotel-colline-de-france.jpg',
     titel: 'Hotel Colline de France',
     location: 'Gramado, Brazil',
-    description: 'A French-inspired luxury boutique hotel offering an intimate and romantic atmosphere with exceptional service.',
+    description:
+        'A French-inspired luxury boutique hotel offering an intimate and romantic atmosphere with exceptional service.',
     price: '\$850',
     rating: '4.9',
     days: '3 days',
@@ -178,7 +180,7 @@ List<Item> items = [
     days: '5 days',
     itinerary: 'Golf packages with spa treatments and beach activities',
     weather: '28°C',
-    category: ['GOLF', 'SPA', 'BEACH'],
+    category: ['GOLF', 'SPA', 'BEACH', 'Family', 'Spa & Wellness'],
   ),
   Item(
     id: 8,
@@ -191,7 +193,7 @@ List<Item> items = [
     days: '6 days',
     itinerary: 'Beach activities and water sports included',
     weather: '30°C',
-    category: ['BEACH', 'ALL-INCLUSIVE', 'WATER_SPORTS'],
+    category: ['BEACH', 'ALL-INCLUSIVE', 'WATER_SPORTS', 'Family', 'Spa & Wellness'],
   ),
 ];
 
@@ -206,7 +208,7 @@ class Categories {
 List<Categories> categories = [
   Categories(id: 0, image: 'assets/overwater-villas.jpg', name: 'Overwater'),
   Categories(id: 1, image: 'assets/sky-pool.jpg', name: 'Infinity Pools'),
-  Categories(id: 2, image: 'assets/beach-grill-restaurant.jpg', name: 'Dining'),
+  Categories(id: 2, image: 'assets/beach-grill-restaurant.jpg', name: 'Spa & Wellness'),
   Categories(id: 3, image: 'assets/aerial-view.jpg', name: 'Beachfront'),
   Categories(id: 4, image: 'assets/wvpbedroom.jpg', name: 'Suites'),
   Categories(id: 5, image: 'assets/kain-pool-kids-section.jpg', name: 'Family'),
