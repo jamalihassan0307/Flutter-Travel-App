@@ -154,6 +154,45 @@ List<Item> items = [
     weather: '26°C',
     category: ['BEACH', 'SPORTS', 'FAMILY'],
   ),
+  Item(
+    id: 6,
+    image: 'assets/hotel-colline-de-france.jpg',
+    titel: 'Hotel Colline de France',
+    location: 'Gramado, Brazil',
+    description: 'A French-inspired luxury boutique hotel offering an intimate and romantic atmosphere with exceptional service.',
+    price: '\$850',
+    rating: '4.9',
+    days: '3 days',
+    itinerary: 'Romantic getaway with French cuisine and wine tasting experience',
+    weather: '22°C',
+    category: ['BOUTIQUE', 'ROMANTIC', 'CULINARY'],
+  ),
+  Item(
+    id: 7,
+    image: 'assets/voyage-belek-golf-spa.jpg',
+    titel: 'Voyage Belek Golf & Spa',
+    location: 'Belek, Turkey',
+    description: 'Ultra-luxury golf resort with extensive spa facilities and private beach access.',
+    price: '\$1,600',
+    rating: '4.8',
+    days: '5 days',
+    itinerary: 'Golf packages with spa treatments and beach activities',
+    weather: '28°C',
+    category: ['GOLF', 'SPA', 'BEACH'],
+  ),
+  Item(
+    id: 8,
+    image: 'assets/salinas-maragogi-all.jpg',
+    titel: 'Salinas Maragogi',
+    location: 'Maragogi, Brazil',
+    description: 'All-inclusive beach resort with natural pools and water sports activities.',
+    price: '\$1,400',
+    rating: '4.7',
+    days: '6 days',
+    itinerary: 'Beach activities and water sports included',
+    weather: '30°C',
+    category: ['BEACH', 'ALL-INCLUSIVE', 'WATER_SPORTS'],
+  ),
 ];
 
 class Categories {
@@ -171,6 +210,8 @@ List<Categories> categories = [
   Categories(id: 3, image: 'assets/aerial-view.jpg', name: 'Beachfront'),
   Categories(id: 4, image: 'assets/wvpbedroom.jpg', name: 'Suites'),
   Categories(id: 5, image: 'assets/kain-pool-kids-section.jpg', name: 'Family'),
+  Categories(id: 6, image: 'assets/rbvpool.jpg', name: 'Pools'),
+  Categories(id: 7, image: 'assets/discover-pure-paradise.jpg', name: 'Luxury'),
 ];
 
 class BottonNavData {

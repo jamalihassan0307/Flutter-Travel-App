@@ -17,6 +17,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
 
+  // Add these variables for search functionality
+  final TextEditingController _searchController = TextEditingController();
+  List<Item> filteredItems = [];
+
   @override
   void initState() {
     super.initState();
@@ -28,10 +32,29 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
     _controller.forward();
+
+    // Initialize filtered items
+    filteredItems = List.from(items);
+  }
+
+  // Add search function
+  void _searchItems(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        filteredItems = List.from(items);
+      } else {
+        filteredItems = items.where((item) {
+          return item.titel.toLowerCase().contains(query.toLowerCase()) ||
+              item.location.toLowerCase().contains(query.toLowerCase()) ||
+              item.category.any((category) => category.toLowerCase().contains(query.toLowerCase()));
+        }).toList();
+      }
+    });
   }
 
   @override
   void dispose() {
+    _searchController.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -99,10 +122,21 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           ],
                         ),
                         child: TextField(
+                          controller: _searchController,
+                          onChanged: _searchItems,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Search luxury stays...',
                             icon: Icon(Icons.search, color: blueColor),
+                            suffixIcon: _searchController.text.isNotEmpty
+                                ? IconButton(
+                                    icon: Icon(Icons.clear, color: Colors.grey),
+                                    onPressed: () {
+                                      _searchController.clear();
+                                      _searchItems('');
+                                    },
+                                  )
+                                : null,
                           ),
                         ),
                       ),
@@ -168,11 +202,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
+                    final item = filteredItems[index];
                     return GestureDetector(
                       onTap: () => Navigator.push(
                         context,
                         PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) => DetailsPage(item: items[index]),
+                          pageBuilder: (context, animation, secondaryAnimation) => DetailsPage(item: item),
                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
                             return FadeTransition(
                               opacity: animation,
@@ -182,7 +217,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                         ),
                       ),
                       child: Hero(
-                        tag: 'hotel_${items[index].id}',
+                        tag: 'hotel_${item.id}',
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -205,7 +240,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                       top: Radius.circular(20),
                                     ),
                                     image: DecorationImage(
-                                      image: AssetImage(items[index].image),
+                                      image: AssetImage(item.image),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -217,7 +252,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      items[index].titel,
+                                      item.titel,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
@@ -232,7 +267,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                         SizedBox(width: 5),
                                         Expanded(
                                           child: Text(
-                                            items[index].location,
+                                            item.location,
                                             style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 12,
@@ -248,7 +283,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          items[index].price,
+                                          item.price,
                                           style: TextStyle(
                                             color: blueColor,
                                             fontWeight: FontWeight.bold,
@@ -258,7 +293,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                           children: [
                                             Icon(Icons.star, size: 14, color: Colors.amber),
                                             Text(
-                                              items[index].rating,
+                                              item.rating,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 12,
@@ -277,7 +312,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       ),
                     );
                   },
-                  childCount: items.length,
+                  childCount: filteredItems.length,
                 ),
               ),
             ),
